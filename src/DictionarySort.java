@@ -44,8 +44,24 @@ public class DictionarySort {
 	 * @param wordToFind - String to find in words
 	 * @return a SearchResult (index of item found or -1 if not found, number of iterations in search loop)
 	 */
-	public static SearchResult sequentialSearch(String wordToFind) {
-		//TODO 
+	public static SearchResult sequentialSearch(String wordToFind) 
+	{
+         int count=0;
+         for(int i=0; i<words.size(); i++)
+          {
+	     if(words.get(i).equals(wordToFind))
+	     {
+	      count++;
+	      SearchResult result=new SearchResult(i, count);
+	       return result;
+	    }
+	    else
+	   {
+	     count++;
+	   }
+	  }
+	 SearchResult result=new SearchResult(-1, count);
+   	return result;
 	}
 
 	/**
@@ -54,8 +70,33 @@ public class DictionarySort {
 	 * @param wordToFind - String to find in words
 	 * @return a SearchResult (index of item found or -1 if not found, number of iterations in search loop)
 	 */
-	public static SearchResult binarySearch(String wordToFind) {
-		//TODO 
+	public static SearchResult binarySearch(String wordToFind) 
+	{
+	int min=0;
+	  int max=words.size()-1;
+	  int count=0;
+	  while(min<=max)
+	 {
+	    int mid=(min+max)/2;
+	    if(words.get(mid).compareTo(wordToFind)==0)
+	    {
+	      count++;
+	     SearchResult result=new SearchResult(mid, count);
+	     return result;
+	   }
+	   else if(words.get(mid).compareTo(wordToFind)<0)
+	   {
+	     min=mid+1;
+	     count++;
+	   }
+	   else
+	   {
+	     max=mid-1;
+	     count++;
+	    }
+	  }
+  	 SearchResult result=new SearchResult(-1, count);
+	  return result; 	
 	}
 	
 	/**
@@ -64,8 +105,22 @@ public class DictionarySort {
 	 * @param list - ArrayList of words to sort
 	 *
 	 */
-	public static void sortList(ArrayList<String> list) {
-		//TODO
+	public static void sortList(ArrayList<String> list) 
+	{
+	 for(int i=0; i<list.size()-1; i++)
+	 {
+	 int smallest=i;
+	 for(int j=i+1; j<list.size(); j++)
+	 {
+	   if(list.get(j).compareTo(list.get(smallest))<0)
+	   {
+	    smallest=j;
+	  }
+	 }
+	 String store=list.get(i);
+	 list.set(i, list.get(smallest));
+    	list.set(smallest, store);
+	 }
 	}
 
 	/**
@@ -84,4 +139,3 @@ public class DictionarySort {
 		return result;
 	}
 }
-
